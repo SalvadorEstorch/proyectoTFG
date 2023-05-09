@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es"
+    xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+
+	<div layout:fragment="form">
+		<br>
+		<form action="" method="post" th:object="${evento}"
+			enctype="multipart/form-data">
+			
+			<div class="mb-3">
+				<label for="idEvento" class="form-label">Id : </label> <input
+					type="text" id="idEvento" placeholder="Id Evento"
+					class="form-control" th:field="*{idEvento}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('idEvento')}"
+					th:errors="*{idEvento}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="activo" class="form-label">Activo : </label> <input
+					type="text" id="activo" placeholder="¿Está activo?"
+					class="form-control" th:field="*{activo}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('activo')}"
+					th:errors="*{activo}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="aforoMax" class="form-label">Aforo Máximo : </label> <input
+					type="number" id="aforoMax" placeholder="Introduzca el aforo máximo"
+					class="form-control" th:field="*{aforoMax}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('aforoMax')}"
+					th:errors="*{aforoMax}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="ciudad" class="form-label">Ciudad : </label> <input
+					type="text" id="ciudad" placeholder="Introduzca la ciudad"
+					class="form-control" th:field="*{ciudad}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('ciudad')}"
+					th:errors="*{ciudad}"></div>
+			</div>
+
+			<div class="mb-3">
+				<label for="descripcionE" class="form-label">Descripción : </label>
+				<textarea id="sinopsis" placeholder="Introduzca la descripción"
+					class="form-control" th:field="*{descripcionE}"></textarea>
+				<div class="invalid-feedback"
+					th:if="${#fields.hasErrors('descripcionE')}" th:errors="*{descripcionE}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="destacado" class="form-label">Destacado : </label> <input
+					type="text" id="destacado" placeholder="¿Es un evento destacado?"
+					class="form-control" th:field="*{destacado}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('destacado')}"
+					th:errors="*{destacado}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="direccion" class="form-label">Dirección : </label> <input
+					type="text" id="direccion" placeholder="Introduzca la dirección"
+					class="form-control" th:field="*{direccion}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('direccion')}"
+					th:errors="*{direccion}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="duracion" class="form-label">Duración : </label> <input
+					type="number" id="duracion" placeholder="Introduzca la duración"
+					class="form-control" th:field="*{duracion}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('duracion')}"
+					th:errors="*{duracion}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="fechaInicio" class="form-label">Fecha de
+					inicio : </label> <input type="date" id="fechaInicio"
+					placeholder="Introduzca la fecha de inicio" class="form-control"
+					th:field="*{fechaInicio}">
+				<div class="invalid-feedback"
+					th:if="${#fields.hasErrors('fechaInicio')}"
+					th:errors="*{fechaInicio}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="minimoAsistencia" class="form-label">Asistencia mínima : </label> <input
+					type="number" id="minimoAsistencia" placeholder="Introduzca la asistencia mínima"
+					class="form-control" th:field="*{minimoAsistencia}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('minimoAsistencia')}"
+					th:errors="*{minimoAsistencia}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="nombreE" class="form-label">Nombre del Evento : </label> <input
+					type="text" id="nombreE" placeholder="Introduzca el nombre del evento"
+					class="form-control" th:field="*{nombreE}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('nombreE')}"
+					th:errors="*{nombreE}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="precioDecimal" class="form-label">Precio : </label> <input
+					type="number" id="precioDecimal" placeholder="Introduzca el precio"
+					class="form-control" th:field="*{precioDecimal}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('precioDecimal')}"
+					th:errors="*{precioDecimal}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="tipo" class="form-label">Tipo : </label> <input
+					type="text" id="tipo" placeholder="Introduzca el tipo"
+					class="form-control" th:field="*{tipo}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('tipo')}"
+					th:errors="*{tipo}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="portada" class="form-label">Portada : </label> <input
+					type="file" name="portada" id="portad" class="form-control"
+					th:field="*{portada}">
+				<div class="invalid-feedback"
+					th:if="${#fields.hasErrors('portada')}" th:errors="*{portada}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="youtubeTrailerId" class="form-label">Youtube
+					Trailer ID : </label> <input type="text" id="youtubeTrailerId"
+					placeholder="Introduce el Youtube Trailer ID" class="form-control"
+					th:field="*{youtubeTrailerId}">
+				<div class="invalid-feedback"
+					th:if="${#fields.hasErrors('youtubeTrailerId')}"
+					th:errors="*{youtubeTrailerId}"></div>
+			</div>
+			
+
+			<div class="text-end">
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
