@@ -13,14 +13,6 @@
 			enctype="multipart/form-data">
 			
 			<div class="mb-3">
-				<label for="idEvento" class="form-label">Id : </label> <input
-					type="text" id="idEvento" placeholder="Id Evento"
-					class="form-control" th:field="*{idEvento}">
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('idEvento')}"
-					th:errors="*{idEvento}"></div>
-			</div>
-			
-			<div class="mb-3">
 				<label for="activo" class="form-label">Activo : </label> <input
 					type="text" id="activo" placeholder="¿Está activo?"
 					class="form-control" th:field="*{activo}">
