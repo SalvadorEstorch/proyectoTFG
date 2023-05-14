@@ -86,7 +86,6 @@ public class AdminControlador {
 		eventoDB.setPrecioDecimal(evento.getPrecioDecimal());
 		eventoDB.setTipo(evento.getTipo());
 		eventoDB.setPortada(evento.getPortada());
-		eventoDB.setRutaPortada(evento.getRutaPortada());
 		eventoDB.setYoutubeTrailerId(evento.getYoutubeTrailerId());
 		
 		if(!evento.getPortada().isEmpty()) {
