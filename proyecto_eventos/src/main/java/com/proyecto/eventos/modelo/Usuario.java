@@ -40,7 +40,7 @@ public class Usuario implements Serializable {
 
 	private String password;
 
-	
+	//private Perfile perfile;
 	
 	
 

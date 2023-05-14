@@ -22,29 +22,35 @@ form .invalid-feedback {
 	display: block;
 }
 </style>
+ 
 </head>
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container-fluid">
-		<img src="/assets/logo.jpeg" alt="Mi imagen" class="img-fluid rounded-circle me-5" style="width: 50px; height: 50px;">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">
+  				<img src="" alt="Logo" height="30" style="filter: grayscale(100%) brightness(80%);">
+			</a>
 
-		<button class="navbar-toggler" type="button"
-			data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-				<li class="nav-item"><a class="nav-link" href="/eventos">Eventos</a></li>
-				<li class="nav-item"><a class="nav-link" href="/admin">Administración</a></li>
-			</ul>
+			
+<!-- 			<a class="navbar-brand" href="/">Hola Eventos</a> -->
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+					<li class="nav-item"><a class="nav-link" href="/eventos">Peliculas</a></li>
+					<li class="nav-item"><a class="nav-link" href="/admin">Administración</a></li>
+					<li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+					<li class="nav-item"><a class="nav-link" href="/registro">Registro</a></li>
+				</ul>
+			</div>
 		</div>
-	</div>
-</nav>
-
+	</nav>
 
     <div layout:fragment="content" class="container my-5">
     </div>
