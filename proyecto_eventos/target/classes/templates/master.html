@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="es"
-   xmlns:th="http://www.thymeleaf.org"
-   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="utf-8">
 <title>CinemaTrailer</title>
@@ -22,18 +21,15 @@ form .invalid-feedback {
 	display: block;
 }
 </style>
- 
 </head>
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/">
-  				<img src="" alt="Logo" height="30" style="filter: grayscale(100%) brightness(80%);">
-			</a>
+			<img src="/assets/logo.jpeg" alt="Mi imagen"
+				class="img-fluid rounded-circle me-5"
+				style="width: 50px; height: 50px;">
 
-			
-<!-- 			<a class="navbar-brand" href="/">Hola Eventos</a> -->
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -43,18 +39,21 @@ form .invalid-feedback {
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-					<li class="nav-item"><a class="nav-link" href="/eventos">Peliculas</a></li>
+					<li class="nav-item"><a class="nav-link" href="/eventos">Eventos</a></li>
 					<li class="nav-item"><a class="nav-link" href="/admin">Administración</a></li>
-					<li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="/login">Log
+							In</a></li>
 					<li class="nav-item"><a class="nav-link" href="/registro">Registro</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-    <div layout:fragment="content" class="container my-5">
-    </div>
-    
+
+	<div layout:fragment="content" class="container my-5"></div>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
 
@@ -67,9 +66,7 @@ form .invalid-feedback {
 		src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-		
-    <div layout:fragment="scripts" th:remove="tag">
-       
-    </div>
+
+	<div layout:fragment="scripts" th:remove="tag"></div>
 </body>
 </html>

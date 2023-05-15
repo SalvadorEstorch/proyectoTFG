@@ -1,13 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Build-Jdk-Spec: 17
-=======
-<<<<<<< HEAD
-Build-Jdk-Spec: 18
-=======
-Build-Jdk-Spec: 19
->>>>>>> 0e862afb0514bc6454ee981bdc7db0cbcde4b38e
->>>>>>> 50ef0b404a69d74cbf563399388d6cf2ccc2f6bc
 Implementation-Title: mini-sistema-trailers
 Implementation-Version: 1.0
 Created-By: Maven Integration for Eclipse
