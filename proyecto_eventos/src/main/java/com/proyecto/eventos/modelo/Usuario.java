@@ -12,6 +12,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 
 /**
  * The persistent class for the usuarios database table.
@@ -32,8 +35,7 @@ public class Usuario implements Serializable {
 
 	private int enabled;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_registro")
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date fechaRegistro;
 
 	private String nombre;
