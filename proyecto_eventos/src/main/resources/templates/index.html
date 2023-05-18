@@ -1,31 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org/" 
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{master.html}">
+<html xmlns:th="http://www.thymeleaf.org/"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	layout:decorate="~{master.html}">
 <head>
 <meta charset="utf-8">
 <title>Inicio</title>
 </head>
 <body>
+	<h4>
+		Bienvenido <span sec:authentication="username"></span>
+	</h4>
 
-  <div layout:fragment="content">
-    <div class="bg-light p-5 rounded">
-       <img src="/assets/banner.png" alt="Mi imagen" class="img-fluid rounded w-100" >
-    </div>
+	<div layout:fragment="content">
+		<div class="bg-light p-5 rounded">
+			<img src="/assets/banner.png" alt="Mi imagen"
+				class="img-fluid rounded w-100">
+		</div>
 
-    <h4 class="text-danger mt-5">Últimos eventos</h4>
+		<h4 class="text-danger mt-5">Últimos eventos</h4>
 
-<div class="row">
-       <div class="col-md-3 my-5" th:each="evento : ${ultimosEventos}" th:object="${evento}">
-        <a th:href="@{/eventos/{id}(id=*{idEvento})}" class="card shadow-lg" style="text-decoration:none;">
-            <img th:src="@{/assets/{filename}(filename=*{rutaPortada})}" th:alt="*{nombreE}" class="card-img-top">
-            <div class="card-body">
-                <h2 class="card-title fs-6" th:text="*{nombreE}"></h2>
-                <!-- <p th:text="{#temporals.format(fechaInicio,'dd/MM/yyyy')}" class="text-muted small"></p> -->
-            </div>
-        </a>
-    </div>
-    </div>
-  </div> 
+		<div class="row">
+			<div class="col-md-3 my-5" th:each="evento : ${ultimosEventos}"
+				th:object="${evento}">
+				<a th:href="@{/eventos/{id}(id=*{idEvento})}" class="card shadow-lg"
+					style="text-decoration: none;"> <img
+					th:src="@{/assets/{filename}(filename=*{rutaPortada})}"
+					th:alt="*{nombreE}" class="card-img-top">
+					<div class="card-body">
+						<h2 class="card-title fs-6" th:text="*{nombreE}"></h2>
+						<!-- <p th:text="{#temporals.format(fechaInicio,'dd/MM/yyyy')}" class="text-muted small"></p> -->
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

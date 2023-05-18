@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proyecto.eventos.modelo.Evento;
+import com.proyecto.eventos.modelo.Usuario;
 import com.proyecto.eventos.repositorios.EventoRepositorio;
+import com.proyecto.eventos.repositorios.UsuarioRepositorio;
 
 
 @Controller
@@ -25,6 +27,8 @@ public class HomeControlador {
 
 	@Autowired
 	private EventoRepositorio eRepo;
+	@Autowired
+	private UsuarioRepositorio uRepo;
 
 	@GetMapping("")
     public ModelAndView verPaginaDeInicio() {
@@ -44,6 +48,20 @@ public class HomeControlador {
 	
 	@GetMapping("/eventos/{idEvento}")
 	public ModelAndView mostrarDetallesEvento(@PathVariable Integer idEvento) {
+		Evento evento = eRepo.getOne(idEvento);
+		return new ModelAndView("evento").addObject("evento",evento);
+	}
+	
+	@GetMapping("/usuarios")
+	public ModelAndView listarUsuarios(@PageableDefault(sort = "fechaRegistro",direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<Usuario> usuarios = uRepo.findAll(pageable);
+		return new ModelAndView("usuarios")
+				        .addObject("usuarios",usuarios);
+	}
+	
+	
+	@GetMapping("/usuarios/{username}")
+	public ModelAndView mostrarDetallesUsuario(@PathVariable Integer idEvento) {
 		Evento evento = eRepo.getOne(idEvento);
 		return new ModelAndView("evento").addObject("evento",evento);
 	}
