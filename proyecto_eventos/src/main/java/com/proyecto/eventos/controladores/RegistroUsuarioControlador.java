@@ -11,8 +11,6 @@ import com.proyecto.eventos.dto.RegistroUsuarioDTO;
 
 import com.proyecto.eventos.servicio.UsuarioDao;
 
-
-
 @Controller
 @RequestMapping("/registro")
 public class RegistroUsuarioControlador {
@@ -22,8 +20,7 @@ public class RegistroUsuarioControlador {
 	public RegistroUsuarioControlador(UsuarioDao usuarioServicio) {
 		super();
 		this.usuarioServicio = usuarioServicio;
-	}
-	
+	}	
 		
 	@ModelAttribute("usuario")
 	public RegistroUsuarioDTO retornarNuevoUsuarioRegistroDTO() {
@@ -38,6 +35,6 @@ public class RegistroUsuarioControlador {
 	@PostMapping
 	public String registrarCuentaDeUsuario(@ModelAttribute("usuario") RegistroUsuarioDTO registroDTO) {
 		usuarioServicio.guardar(registroDTO);
-		return "login";
+		return "redirect:/index?exito";
 	}
 }

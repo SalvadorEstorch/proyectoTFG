@@ -1,81 +1,65 @@
 package com.proyecto.eventos.servicio;
 
-
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.proyecto.eventos.dto.RegistroUsuarioDTO;
-import com.proyecto.eventos.modelo.Perfile;
+import com.proyecto.eventos.modelo.Rol;
 import com.proyecto.eventos.modelo.Usuario;
-import com.proyecto.eventos.repositorios.PerfilRepositorio;
 import com.proyecto.eventos.repositorios.UsuarioRepositorio;
-import com.proyecto.eventos.servicio.*;
 
 
 
-
-@Repository
+@Service
 public class UsuarioDaoImpl implements UsuarioDao {
+
 	
-	
-	
+	private UsuarioRepositorio usuarioRepositorio;
+
 	@Autowired
-	UsuarioRepositorio uRepo;
+	private BCryptPasswordEncoder passwordEncoder;
 	
-	@Autowired
-	PerfilRepositorio perfilRepo;
-	
-	 
-	
-	@Override
-	public Usuario buscarUno(String email) {
-		// TODO Auto-generated method stub
-		return uRepo.findById(email).orElse(null);
-	}
-	
-//	@Override
-//	public boolean registro(Usuario usuario) {
-//		if (buscarUno(usuario.getEmail()) == null) {
-//				uRepo.save(usuario);
-//				return true;
-//		}
-//		return false;
-//	}
-	
-	@Override
-	public Usuario findUser(String username, String password) {
-		// TODO Auto-generated method stub
-		return uRepo.findUsuario(username,password);
+	public UsuarioDaoImpl(UsuarioRepositorio usuarioRepositorio) {
+		super();
+		this.usuarioRepositorio = usuarioRepositorio;
 	}
 
+	@Override
+	public Usuario guardar(RegistroUsuarioDTO registroDTO) {
+		Usuario usuario = new Usuario(registroDTO.getNombre(), 
+				registroDTO.getApellido(),registroDTO.getEmail(),
+				passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(new Rol("ROLE_USER")));
+		return usuarioRepositorio.save(usuario);
+	}
 
-@Override
-public Usuario guardar(RegistroUsuarioDTO registroDTO) {
-	 Usuario usuario = new Usuario();
-     usuario.setUsername(registroDTO.getUsername());
-     usuario.setEmail(registroDTO.getEmail());
-     usuario.setEnabled(1);
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Usuario usuario = usuarioRepositorio.findByEmail(username);
+		if(usuario == null) {
+			throw new UsernameNotFoundException("Usuario o password inválidos");
+		}
+		return new User(usuario.getEmail(),usuario.getPassword(), mapearAutoridadesRoles(usuario.getRoles()));
+	}
 
-     usuario.setNombre(registroDTO.getNombre());
-     usuario.setPassword(registroDTO.getPassword());
-
-     // Asignar un perfil por defecto al usuario
-     
-    // Optional<Perfile> perfile = perfilRepo.findById(1);
-
-     //usuario.setpri
-     return uRepo.save(usuario);
- }
-
-@Override
-public List<Usuario> listarUsuarios() {
-	return uRepo.findAll();
-}
+	private Collection<? extends GrantedAuthority> mapearAutoridadesRoles(Collection<Rol> roles){
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNombre())).collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<Usuario> listarUsuarios() {
+		return usuarioRepositorio.findAll();
+	}
 }
 
 

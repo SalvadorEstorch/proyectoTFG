@@ -1,49 +1,19 @@
 package com.proyecto.eventos.dto;
 
-import java.util.Date;
-
 public class RegistroUsuarioDTO {
 
-	private String username;
-
+	private Long id;
 	private String nombre;
-
+	private String apellido;
 	private String email;
-
 	private String password;
 
-	public RegistroUsuarioDTO(String username, String nombre, String email, String password) {
-		super();
-		this.username = username;
-		this.nombre = nombre;
-
-		this.email = email;
-		this.password = password;
+	public Long getId() {
+		return id;
 	}
 
-	public RegistroUsuarioDTO() {
-		super();
-	}
-
-	public RegistroUsuarioDTO(String nombre, String email, String password) {
-		super();
-		this.nombre = nombre;
-
-		this.email = email;
-		this.password = password;
-	}
-
-	public RegistroUsuarioDTO(String email) {
-		super();
-		this.email = email;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
@@ -52,6 +22,14 @@ public class RegistroUsuarioDTO {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getEmail() {
@@ -68,6 +46,19 @@ public class RegistroUsuarioDTO {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	public RegistroUsuarioDTO(String nombre, String apellido, String email, String password) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.password = password;
+	}
+
+	public RegistroUsuarioDTO() {
+
 	}
 
 }
