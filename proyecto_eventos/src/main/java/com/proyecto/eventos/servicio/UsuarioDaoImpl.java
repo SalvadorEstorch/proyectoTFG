@@ -19,8 +19,6 @@ import com.proyecto.eventos.modelo.Rol;
 import com.proyecto.eventos.modelo.Usuario;
 import com.proyecto.eventos.repositorios.UsuarioRepositorio;
 
-
-
 @Service
 public class UsuarioDaoImpl implements UsuarioDao {
 
@@ -61,8 +59,3 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		return usuarioRepositorio.findAll();
 	}
 }
-
-
-
-	
-

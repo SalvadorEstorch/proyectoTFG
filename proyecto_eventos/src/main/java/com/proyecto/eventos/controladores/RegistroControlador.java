@@ -11,7 +11,7 @@ import com.proyecto.eventos.servicio.UsuarioDao;
 public class RegistroControlador {
 
 	@Autowired
-	private UsuarioDao servicio;
+	private UsuarioDao usuarioDao;
 	
 	@GetMapping("/login")
 	public String iniciarSesion() {
@@ -20,7 +20,7 @@ public class RegistroControlador {
 	
 	@GetMapping("/")
 	public String verPaginaDeInicio(Model modelo) {
-		modelo.addAttribute("usuarios", servicio.listarUsuarios());
+		modelo.addAttribute("usuarios", usuarioDao.listarUsuarios());
 		return "index";
 	}
 }
