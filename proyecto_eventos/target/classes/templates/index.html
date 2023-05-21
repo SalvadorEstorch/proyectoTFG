@@ -8,13 +8,6 @@
 <title>Inicio</title>
 </head>
 <body>
-	<h4>
-		Bienvenido <span sec:authentication="username"></span>
-	</h4>
-	<div th:if=${param.exito}>
-		<div class="alert alert-info">Se ha registrado exitosamente a la
-			aplicación</div>
-	</div>
 
 	<div layout:fragment="content">
 		<div class="bg-light p-5 rounded">
@@ -23,7 +16,9 @@
 		</div>
 
 		<h4 class="text-danger mt-5">Últimos eventos</h4>
-
+		<h4>
+			Bienvenido <span sec:authentication="principal.username"></span>
+		</h4>
 		<div class="row">
 			<div class="col-md-3 my-5" th:each="evento : ${ultimosEventos}"
 				th:object="${evento}">

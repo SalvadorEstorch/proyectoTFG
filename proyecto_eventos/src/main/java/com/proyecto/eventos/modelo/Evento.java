@@ -12,8 +12,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -57,7 +55,7 @@ public class Evento implements Serializable {
 	@Column(name="fecha_inicio")
 	private Date fechaInicio;*/
 	
-	@NotNull
+
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate fechaInicio;
 	
@@ -78,7 +76,7 @@ public class Evento implements Serializable {
 	
 	private String rutaPortada;
 	
-	@NotBlank
+//	@NotBlank
 	private String youtubeTrailerId;
 	
 	
@@ -221,7 +219,7 @@ public class Evento implements Serializable {
 
 	public Evento(int idEvento, byte activo, int aforoMax, String ciudad, String descripcionE, String destacado,
 			String direccion, int duracion, LocalDate fechaInicio, int minimoAsistencia, String nombreE,
-			double precioDecimal, String tipo, MultipartFile portada, String rutaPortada, @NotBlank String youtubeTrailerId) {
+			double precioDecimal, String tipo, MultipartFile portada, String rutaPortada, String youtubeTrailerId) {
 		super();
 		this.idEvento = idEvento;
 		this.activo = activo;
@@ -243,7 +241,7 @@ public class Evento implements Serializable {
 
 	public Evento(byte activo, int aforoMax, String ciudad, String descripcionE, String destacado, String direccion,
 			int duracion, LocalDate fechaInicio, int minimoAsistencia, String nombreE, double precioDecimal, String tipo,
-			MultipartFile portada, String rutaPortada, @NotBlank String youtubeTrailerId) {
+			MultipartFile portada, String rutaPortada, String youtubeTrailerId) {
 		super();
 		this.activo = activo;
 		this.aforoMax = aforoMax;
