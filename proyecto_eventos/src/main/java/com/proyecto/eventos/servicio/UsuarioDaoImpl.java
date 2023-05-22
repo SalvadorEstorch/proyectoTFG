@@ -37,7 +37,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	public Usuario guardar(RegistroUsuarioDTO registroDTO) {
 		Usuario usuario = new Usuario(registroDTO.getNombre(), 
 				registroDTO.getApellido(),registroDTO.getEmail(),
-				passwordEncoder.encode(registroDTO.getPassword()),Arrays.asList(new Rol("ROLE_USER")));
+				passwordEncoder.encode(registroDTO.getPassword()),registroDTO.getFechaRegistro(),
+				Arrays.asList(new Rol("ROLE_USER")));
 		return usuarioRepositorio.save(usuario);
 	}
 

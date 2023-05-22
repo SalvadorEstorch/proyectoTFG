@@ -1,5 +1,7 @@
 package com.proyecto.eventos.dto;
 
+import java.time.LocalDateTime;
+
 public class RegistroUsuarioDTO {
 
 	private Long id;
@@ -7,6 +9,7 @@ public class RegistroUsuarioDTO {
 	private String apellido;
 	private String email;
 	private String password;
+	private LocalDateTime fechaRegistro;
 
 	public Long getId() {
 		return id;
@@ -48,17 +51,27 @@ public class RegistroUsuarioDTO {
 		this.password = password;
 	}
 
+	public LocalDateTime getFechaRegistro() {
+		return fechaRegistro;
+	}
 
-	public RegistroUsuarioDTO(String nombre, String apellido, String email, String password) {
+	public void setFechaRegistro(LocalDateTime fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+
+	public RegistroUsuarioDTO(String nombre, String apellido, String email, String password, LocalDateTime fechaRegistro) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.password = password;
+		this.fechaRegistro = fechaRegistro;
 	}
 
 	public RegistroUsuarioDTO() {
 
 	}
+
+	
 
 }

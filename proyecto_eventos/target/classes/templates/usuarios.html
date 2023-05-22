@@ -16,14 +16,14 @@
 			<div class="row">
 				<div class="col-md-3 my-5" th:each="usuario : ${usuarios}"
 					th:object="${usuario}">
-					<a th:href="@{/eventos/{id}(id=*{username})}" class="card shadow-lg"
+					<a th:href="@{/eventos/{id}(id=*{id})}" class="card shadow-lg"
 						style="text-decoration: none;">
 						<div class="card-body">
 							<h2 class="card-title fs-6" th:text="*{nombre}"></h2>
-								Fecha registro:<p th:text="*{fechaRegistro}"class="text-muted small"></p>
 								Email:<p th:text="*{email}"class="text-muted small"></p>
-								Usuario:<p th:text="*{username}"class="text-muted small"></p>
+								Usuario:<p th:text="*{nombre}"class="text-muted small"></p>
 								Password:<p th:text="*{password}"class="text-muted small"></p>
+								Fecha registro:<p th:text="*{fechaRegistro}"class="text-muted small"></p>
 						</div>
 					</a>
 				</div>

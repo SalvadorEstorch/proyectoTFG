@@ -50,10 +50,6 @@ public class Evento implements Serializable {
 	private String direccion;
 
 	private int duracion;
-
-	/*@Temporal(TemporalType.DATE)
-	@Column(name="fecha_inicio")
-	private Date fechaInicio;*/
 	
 
 	@DateTimeFormat(iso = ISO.DATE)

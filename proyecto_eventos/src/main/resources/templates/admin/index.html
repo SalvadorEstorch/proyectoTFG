@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <title>Administrar Eventos</title>
 </head>
-<body>
+<body sec:authorize="hasRole('ROLE_ADMIN')">
 
   <div layout:fragment="content">
 		<h2>Eventos</h2>

@@ -1,5 +1,6 @@
 package com.proyecto.eventos.modelo;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -32,6 +34,13 @@ public class Usuario {
 	private String email;
 	
 	private String password;
+	
+	private LocalDateTime fechaRegistro;
+	
+	@PrePersist
+    public void prePersist() {
+        fechaRegistro = LocalDateTime.now();
+    }
 	
 	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinTable(
@@ -80,6 +89,14 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public LocalDateTime getFechaRegistro() {
+		return fechaRegistro;
+	}
+
+	public void setFechaRegistro(LocalDateTime fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
 
 	public Collection<Rol> getRoles() {
 		return roles;
@@ -89,22 +106,24 @@ public class Usuario {
 		this.roles = roles;
 	}
 
-	public Usuario(Long id, String nombre, String apellido, String email, String password, Collection<Rol> roles) {
+	public Usuario(Long id, String nombre, String apellido, String email, String password, LocalDateTime fechaRegistro, Collection<Rol> roles) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.password = password;
+		this.fechaRegistro = fechaRegistro;
 		this.roles = roles;
 	}
 
-	public Usuario(String nombre, String apellido, String email, String password, Collection<Rol> roles) {
+	public Usuario(String nombre, String apellido, String email, String password, LocalDateTime fechaRegistro, Collection<Rol> roles) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.password = password;
+		this.fechaRegistro = fechaRegistro;
 		this.roles = roles;
 	}
 
@@ -112,4 +131,5 @@ public class Usuario {
 		
 	}
 
+	
 }
