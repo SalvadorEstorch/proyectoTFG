@@ -31,16 +31,15 @@ public class HomeControlador {
 	private UsuarioRepositorio uRepo;
 
 	@GetMapping("")
-    public ModelAndView verPaginaDeInicio() {
-        List<Evento> ultimosEventos = eRepo.findAll(PageRequest.of(0,4,Sort.by("fechaInicio").descending())).toList();
-        return new ModelAndView("index")
-                      .addObject("ultimosEventos", ultimosEventos);
-
-    }
+	public ModelAndView verEventosActivos() {
+	    Page<Evento> eventosActivos = eRepo.findByActivo(1, null);
+	    return new ModelAndView("index")
+	                  .addObject("eventos", eventosActivos);
+	}
 	
 	@GetMapping("/eventos")
 	public ModelAndView listarEventos(@PageableDefault(sort = "fechaInicio",direction = Sort.Direction.DESC) Pageable pageable) {
-		Page<Evento> eventos = eRepo.findAll(pageable);
+		Page<Evento> eventos = (Page<Evento>) eRepo.findByActivo(1, null);
 		return new ModelAndView("eventos")
 				        .addObject("eventos",eventos);
 	}

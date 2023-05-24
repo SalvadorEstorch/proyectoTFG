@@ -35,7 +35,7 @@ public class Evento implements Serializable {
 	@Column(name = "idEvento")
 	private int idEvento;
 
-	private byte activo;
+	private int activo;
 
 	@Column(name="aforo_max")
 	private int aforoMax;
@@ -89,12 +89,12 @@ public class Evento implements Serializable {
 
 	
 
-	public byte getActivo() {
+	public int getActivo() {
 		return activo;
 	}
 
-	public void setActivo(byte activo) {
-		this.activo = activo;
+	public void setActivo(int i) {
+		this.activo = i;
 	}
 
 	public int getAforoMax() {
@@ -213,7 +213,7 @@ public class Evento implements Serializable {
 		super();
 	}
 
-	public Evento(int idEvento, byte activo, int aforoMax, String ciudad, String descripcionE, String destacado,
+	public Evento(int idEvento, int activo, int aforoMax, String ciudad, String descripcionE, String destacado,
 			String direccion, int duracion, LocalDate fechaInicio, int minimoAsistencia, String nombreE,
 			double precioDecimal, String tipo, MultipartFile portada, String rutaPortada, String youtubeTrailerId) {
 		super();
@@ -235,7 +235,7 @@ public class Evento implements Serializable {
 		this.youtubeTrailerId = youtubeTrailerId;
 	}
 
-	public Evento(byte activo, int aforoMax, String ciudad, String descripcionE, String destacado, String direccion,
+	public Evento(int activo, int aforoMax, String ciudad, String descripcionE, String destacado, String direccion,
 			int duracion, LocalDate fechaInicio, int minimoAsistencia, String nombreE, double precioDecimal, String tipo,
 			MultipartFile portada, String rutaPortada, String youtubeTrailerId) {
 		super();

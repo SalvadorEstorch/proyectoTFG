@@ -18,9 +18,9 @@ public class RegistroControlador {
 		return "login";
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/login/inicio")
 	public String verPaginaDeInicio(Model modelo) {
 		modelo.addAttribute("usuarios", usuarioDao.listarUsuarios());
-		return "index";
+		return null;
 	}
 }

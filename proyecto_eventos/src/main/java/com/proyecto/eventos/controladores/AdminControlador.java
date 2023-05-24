@@ -106,4 +106,24 @@ public class AdminControlador {
 		
 		return "redirect:/admin";
 	}
+	
+	@GetMapping("/eventos/{id}/desactivar")
+	public String desactivarEvento(@PathVariable Integer id) {
+		Evento evento = eRepo.getOne(id);
+		evento.setActivo(0);
+		eRepo.save(evento);
+		
+		return "redirect:/admin";
+	}
+	
+	@GetMapping("/eventos/{id}/activar")
+	public String activarEvento(@PathVariable Integer id) {
+		Evento evento = eRepo.getOne(id);
+		evento.setActivo(1);
+		eRepo.save(evento);
+		
+		return "redirect:/admin";
+	}
+	
+ 
 }
