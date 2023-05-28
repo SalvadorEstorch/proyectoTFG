@@ -12,6 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -63,5 +64,13 @@ public class HomeControlador {
 	public ModelAndView mostrarDetallesUsuario(@PathVariable Integer idEvento) {
 		Evento evento = eRepo.getOne(idEvento);
 		return new ModelAndView("evento").addObject("evento",evento);
+	}
+	
+	@PostMapping("/usuarios/{id}/eliminar")
+	public String eliminarEvento(@PathVariable Long id) {
+		Usuario usuario = uRepo.getOne(id);
+		uRepo.delete(usuario);
+		
+		return "redirect:/eventos";
 	}
 }

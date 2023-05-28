@@ -31,7 +31,8 @@ public class AdminControlador {
 	@GetMapping("")
 	public ModelAndView verPaginaDeInicio(@PageableDefault(sort = "nombreE", size = 5) Pageable pageable) {
 		Page<Evento> eventos = eRepo.findAll(pageable);
-		return new ModelAndView("admin/index").addObject("eventos", eventos);
+		return new ModelAndView("admin/index")
+				.addObject("eventos", eventos);
 	}
 
 	@GetMapping("/eventos/nuevo")

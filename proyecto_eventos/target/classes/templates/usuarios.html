@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"
-    xmlns:th="http://www.thymeleaf.org"
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{master.html}">
 <head>
@@ -10,36 +9,74 @@
 <body>
 
 	<div layout:fragment="content">
-		<h4>Usuarios Registrados</h4>
+		<h2>Usuarios</h2>
 
-	<div class="row">
-			<div class="row">
-				<div class="col-md-3 my-5" th:each="usuario : ${usuarios}"
-					th:object="${usuario}">
-					<a th:href="@{/eventos/{id}(id=*{id})}" class="card shadow-lg"
-						style="text-decoration: none;">
-						<div class="card-body">
-							<h2 class="card-title fs-6" th:text="*{nombre}"></h2>
-								Email:<p th:text="*{email}"class="text-muted small"></p>
-								Usuario:<p th:text="*{nombre}"class="text-muted small"></p>
-								Password:<p th:text="*{password}"class="text-muted small"></p>
-								Fecha registro:<p th:text="*{fechaRegistro}"class="text-muted small"></p>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Correo</th>
+					<th>Fecha</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="usuario : ${usuarios}" th:object="${usuario}">
+					<td th:text="*{nombre}" class="fs-5 fw-bold"></td>
+					<td th:text="*{apellido}"></td>
+					<td th:text="*{email}"></td>
+					<td th:text="*{fechaRegistro}"></td>
+					<td class="text-end">
+						<!-- 						<div class="btn"> --> <!-- 							<a th:href="@{/admin/eventos/{id}/desactivar(id=*{idEvento})}" -->
+						<!-- 								th:if="${evento.activo == 1}" class="btn btn-outline-danger">Desactivar</a> -->
+
+						<!-- 							<a th:href="@{/admin/eventos/{id}/activar(id=*{idEvento})}" -->
+						<!-- 								th:if="${evento.activo == 0}" class="btn btn-success">Activar</a> -->
+						<!-- 						</div> --> <!-- 						<div class="btn"> --> <!-- 							<a th:href="@{/admin/eventos/{id}/editar(id=*{idEvento})}" -->
+						<!-- 								class="btn btn-primary">Editar</a> --> <!-- 						</div> -->
+						<div class="btn">
+							<a href="javascript:void(0)" class="btn btn-danger"
+								th:onclick="'eliminarUsuario(\'' + ${id} + '\')'">Eliminar</a>
 						</div>
-					</a>
-				</div>
-			</div>
-			<div class="row mt-5" th:with="page=${usuarios}">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="row mt-5" th:with="page=${usuarios}">
+			<div class="col-sm-6">
+				<div sd:pagination-sumary></div>
 				<div class="col-sm-6">
-					<div sd:pagination-sumary></div>
-					<div class="col-sm-6">
-						<nav>
-							<ul class="pagination" sd:pagination="full"></ul>
-						</nav>
-					</div>
+					<nav>
+						<ul class="pagination" sd:pagination="full"></ul>
+					</nav>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+	<div layout:fragment="scripts">
+		<script>
+			function eliminarUsuario(id) {
+				if (!confirm('¿Estás seguro de eliminar este usuario?')) {
+					// Construir la URL de redirección con el ID del usuario
+					var url = "/usuarios/" + id + "/eliminar";
+
+					// Crear un formulario dinámicamente
+					var form = document.createElement("form");
+					form.method = "POST";
+					form.action = url;
+
+					// Agregar el formulario al cuerpo del documento
+					document.body.appendChild(form);
+
+					// Enviar el formulario
+					form.submit();
+				}
+			}
+		</script>
+	</div>
+
+</body>
+
 </body>
 </html>
