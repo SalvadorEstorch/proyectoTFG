@@ -52,6 +52,8 @@
 						<div class="btn">
 							<a href="javascript:void(0)" class="btn btn-danger"
 								th:onclick="'eliminarEvento(' + *{idEvento} +')'">Eliminar</a>
+								<form th:id="'eliminarEventoForm' + *{idEvento}" th:action="@{/admin/eventos/{id}/eliminar(id=*{idEvento})}" method="post" class="d-none">
+					   </form>
 						</div>
 					</td>
 				</tr>

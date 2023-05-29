@@ -35,6 +35,6 @@ public class RegistroUsuarioControlador {
 	@PostMapping
 	public String registrarCuentaDeUsuario(@ModelAttribute("usuario") RegistroUsuarioDTO registroDTO) {
 		usuarioDao.guardar(registroDTO);
-		return "redirect:/index";
+		return "redirect:/login";
 	}
 }

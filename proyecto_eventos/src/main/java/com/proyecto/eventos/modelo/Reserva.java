@@ -49,7 +49,7 @@ public class Reserva implements Serializable {
 
 	//uni-directional many-to-one association to Usuario
 	@ManyToOne
-	@JoinColumn(name="username")
+	@JoinColumn(name="id") //id del usuario
 	private Usuario usuario;
 
 	public Reserva() {
@@ -94,5 +94,7 @@ public class Reserva implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+
 
 }
