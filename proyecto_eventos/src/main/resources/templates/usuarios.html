@@ -33,13 +33,17 @@
 					<td th:text="*{email}"></td>
 					<td th:text="*{fechaRegistro}"></td>
 					<td class="text-end">
-						<!-- 						<div class="btn"> --> <!-- 							<a th:href="@{/admin/eventos/{id}/desactivar(id=*{idEvento})}" -->
-						<!-- 								th:if="${evento.activo == 1}" class="btn btn-outline-danger">Desactivar</a> -->
+<!-- 						<div class="btn"> -->
+<!-- 							<a th:href="@{/admin/eventos/{id}/desactivar(id=*{idEvento})}" -->
+<!-- 								th:if="${evento.activo == 1}" class="btn btn-outline-danger">Desactivar</a> -->
 
-						<!-- 							<a th:href="@{/admin/eventos/{id}/activar(id=*{idEvento})}" -->
-						<!-- 								th:if="${evento.activo == 0}" class="btn btn-success">Activar</a> -->
-						<!-- 						</div> --> <!-- 						<div class="btn"> --> <!-- 							<a th:href="@{/admin/eventos/{id}/editar(id=*{idEvento})}" -->
-						<!-- 								class="btn btn-primary">Editar</a> --> <!-- 						</div> -->
+<!-- 							<a th:href="@{/admin/eventos/{id}/activar(id=*{idEvento})}" -->
+<!-- 								th:if="${evento.activo == 0}" class="btn btn-success">Activar</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="btn"> -->
+<!-- 							<a th:href="@{/admin/eventos/{id}/editar(id=*{idEvento})}" -->
+<!-- 								class="btn btn-primary">Editar</a> -->
+<!-- 						</div> -->
 						<div class="btn">
 							<a href="javascript:void(0)" class="btn btn-danger"
 								th:onclick="'eliminarUsuario(' + *{id} +')'">Eliminar</a>
