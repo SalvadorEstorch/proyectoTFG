@@ -18,6 +18,7 @@
 					<th>Fecha de reserva</th>
 					<th>Evento</th>
 					<th>Usuario reserva</th>
+					<th>Personas</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -25,8 +26,9 @@
 				<tr th:each="reserva : ${reservas}" th:object="${reserva}">
 					<td th:text="*{idReserva}" class="fs-5 fw-bold"></td>
 					<td th:text="*{fechaReserva}"></td>
-					<td th:text="*{evento.idEvento}"></td>
-					<td th:text="*{usuario.id}"></td>
+					<td th:text="*{evento.nombreE}"></td>
+					<td th:text="*{usuario.nombre} + ' ' + *{usuario.apellido}"></td>
+					<td th:text="*{cantidadPersonas}"></td>
 					<td class="text-end">
 					<div class="btn">
 							<a href="javascript:void(0)" class="btn btn-danger"
