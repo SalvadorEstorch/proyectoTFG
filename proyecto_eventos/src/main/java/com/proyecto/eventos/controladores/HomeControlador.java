@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.eventos.modelo.Evento;
 import com.proyecto.eventos.modelo.Reserva;
@@ -103,7 +104,7 @@ public class HomeControlador {
 	}
 	
 	@PostMapping("/usuarios/{id}/eliminar")
-	public String eliminarUsuario(@PathVariable Long id) {
+	public String eliminarUsuario(@PathVariable Long id, RedirectAttributes redirectAttributes) {
 	    try {
 	        Usuario usuario = uRepo.getOne(id);
 
@@ -126,8 +127,9 @@ public class HomeControlador {
 
 	        return "redirect:/usuarios";
 	    } catch (DataIntegrityViolationException e) {
-	        // Capturar la excepción y mostrar un mensaje adecuado
-	        return "redirect:/usuarios/" + id + "/error-reservas";
+	        // Capturar la excepción y mostrar un mensaje adecuado en la página de usuarios
+	        redirectAttributes.addFlashAttribute("errorMessage", "No se puede eliminar el usuario porque tiene reservas asociadas.");
+	        return "redirect:/usuarios";
 	    }
 	}
 	
