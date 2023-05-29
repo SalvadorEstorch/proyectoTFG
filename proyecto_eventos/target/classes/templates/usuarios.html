@@ -56,23 +56,12 @@
 	</div>
 	<div layout:fragment="scripts">
 		<script>
-			function eliminarUsuario(id) {
-				if (!confirm('¿Estás seguro de eliminar este usuario?')) {
-					// Construir la URL de redirección con el ID del usuario
-					var url = "/usuarios/" + id + "/eliminar";
-
-					// Crear un formulario dinámicamente
-					var form = document.createElement("form");
-					form.method = "POST";
-					form.action = url;
-
-					// Agregar el formulario al cuerpo del documento
-					document.body.appendChild(form);
-
-					// Enviar el formulario
-					form.submit();
-				}
+		function eliminarUsuario(id) {
+			if (!confirm('¿Estás seguro de eliminar este usuario?')) {
+				return;
 			}
+			$('#eliminarUsuarioForm' + id).submit();
+		}
 		</script>
 	</div>
 

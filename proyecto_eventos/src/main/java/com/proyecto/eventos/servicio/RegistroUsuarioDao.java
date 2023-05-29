@@ -9,11 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.proyecto.eventos.modelo.Perfile;
 import com.proyecto.eventos.modelo.Usuario;
-import com.proyecto.eventos.modelo.UsuariosPerfile;
-import com.proyecto.eventos.repositorios.PerfilRepositorio;
-import com.proyecto.eventos.repositorios.UsuarioPerfilRepositorio;
 import com.proyecto.eventos.repositorios.UsuarioRepositorio;
 @Service
 public class RegistroUsuarioDao {

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,9 +36,11 @@ public class Reserva implements Serializable {
 	@Column(name="cantidad_personas")
 	private int cantidadPersonas;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha_reserva")
 	private Date fechaReserva;
+	@PrePersist
+	public void prePersist() {
+		fechaReserva = new Date();
+	}
 
 	//uni-directional many-to-one association to Evento
 	@ManyToOne
