@@ -24,6 +24,8 @@
 							<p th:text="*{#temporals.format(fechaInicio,'dd/MM/yyyy')}"
 								class="text-muted small"></p>
 						</div>
+						<a th:href="@{/eventos/{id}/reservarEvento(id=*{idEvento})}"
+						class="btn btn-primary">Reservar Evento</a>
 					</a>
 				</div>
 			</div>
