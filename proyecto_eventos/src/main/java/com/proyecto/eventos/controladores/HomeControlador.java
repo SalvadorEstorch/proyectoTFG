@@ -13,6 +13,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,23 +71,28 @@ public class HomeControlador {
 	    return modelAndView;
 	}
 	@PostMapping("/eventos/{id}/reservarEvento")
-    public String registrarReservaEvento(@PathVariable Integer id,@Validated Reserva reserva,BindingResult bindingResult) {
+    public String registrarReservaEvento(@PathVariable Integer id,@Validated Reserva reserva,BindingResult bindingResult, Model model) {
 		Evento evento = eRepo.getOne(id);
-		reserva.setEvento(evento); // Asignar el evento a la reserva
-		reserva.setUsuario(null);
-	    
-	    
-	 // Obtener el usuario autenticado
-	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    String username = authentication.getName();//se obtiene el username del usuario logado
-	    Usuario usuario=uRepo.findByEmail(username);
 
-	    // Asignar el usuario a la reserva
-	    reserva.setUsuario(usuario);
-	    
+	    // Obtener el usuario autenticado
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String username = authentication.getName(); // Se obtiene el username del usuario logado
+	    Usuario usuario = uRepo.findByEmail(username);
+
+	    // Verificar si el usuario ya ha reservado este evento
+	    if (rRepo.existsByEventoAndUsuario(evento, usuario)) {
+	    	String mensajeError = "Ya has reservado este evento.";
+	        model.addAttribute("mensajeError", mensajeError);
+	        return "altaReserva";
+	    }
+
+	   
+
+	    reserva.setEvento(evento); // Asignar el evento a la reserva
+	    reserva.setUsuario(usuario); // Asignar el usuario a la reserva
 	    rRepo.save(reserva);
 
-	    return "redirect:/eventos";
+	    return "redirect:/reservas";
 	}
 	
 	@GetMapping("/usuarios")

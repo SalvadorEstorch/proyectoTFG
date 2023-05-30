@@ -70,30 +70,7 @@ public class ReservaControlador {
                 .addObject("reservas", reservas);
     }
 
-//    // Endpoint para crear una nueva reserva
-//    @PostMapping("/alta")
-//    public String crearReserva(@RequestBody Reserva reserva, RedirectAttributes attributes) {
-//        Reserva reservaCreada = reservaRepo.crearReserva(reserva);
-//        
-//        // Agregar el mensaje personalizado como atributo para la redirección
-//        attributes.addFlashAttribute("mensaje", "Reserva guardada con éxito");
-//
-//        // Redirigir al index
-//        return "redirect:/index";
-//    }
-//    
-    
 
-//    // Endpoint para obtener una reserva por su ID
-//    @GetMapping("/verUna/{id}")
-//    public ResponseEntity<Reserva> verUna(@PathVariable int id) {
-//        Reserva reserva = reservaRepo.obtenerReserva(id);
-//        if (reserva != null) {
-//            return new ResponseEntity<>(reserva, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
     @PostMapping("/{id}/eliminar")
 	public String eliminarReserva(@PathVariable Integer id) {
 		Reserva reserva = reservaRepo.getOne(id);

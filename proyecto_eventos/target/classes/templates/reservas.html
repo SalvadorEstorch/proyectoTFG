@@ -11,6 +11,10 @@
 	<div layout:fragment="content">
 		<h2>Reservas</h2>
 
+		<div th:if="${mensajeError}" class="text-danger">
+			<p th:text="${mensajeError}"></p>
+		</div>
+
 		<table class="table table-hover">
 			<thead>
 				<tr>

@@ -29,9 +29,9 @@
                     </svg> Ver publicidad
 					</a> <a th:if="${#authorization.expression('isAuthenticated()')}"
 						th:href="@{/eventos/{id}/reservarEvento(id=*{idEvento})}"
-						class="btn btn-primary">Reservar Evento</a> <a
+						class="btn btn-primary" id="btnReservarEvento">Reservar Evento</a> <a
 						th:unless="${#authorization.expression('isAuthenticated()')}"
-						th:href="@{/login}" class="btn btn-primary">Reservar Evento</a>
+						th:href="@{/login}" >Reservar Evento</a>
 
 				</div>
 			</div>
