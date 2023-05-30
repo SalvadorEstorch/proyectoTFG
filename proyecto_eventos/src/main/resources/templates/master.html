@@ -41,9 +41,9 @@ form .invalid-feedback {
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
 					<li class="nav-item"><a class="nav-link" href="/eventos">Eventos</a></li>
+					<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link" href="/reservas">Reservas</a></li>
 					<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link" href="/admin">Administración</a></li>
-					<li class="nav-item"><a class="nav-link" href="/usuarios">Usuarios</a></li>
-					<li class="nav-item"><a class="nav-link" href="/reservas">Reservas</a></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link" href="/usuarios">Usuarios</a></li>
 				</ul>
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link" sec:authorize="isAuthenticated()" th:text="${#authentication.name}"></a></li>

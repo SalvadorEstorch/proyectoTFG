@@ -45,16 +45,27 @@ public class ReservaControlador {
     public ModelAndView listarReservas(@PageableDefault Pageable pageable) {
         // Obtener el objeto de autenticación actual
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // Verificar el rol del usuario actual
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
+
+        Page<Reserva> reservas;
         
-        // Obtener los detalles del usuario actual
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        
-        // Obtener el correo electrónico del usuario actual
-        String email = userDetails.getUsername();
-        
-        // Realizar la consulta de reservas filtrando por el correo electrónico del usuario
-        Page<Reserva> reservas = reservaRepo.findByUsuarioEmail(email, pageable);
-        
+        if (isAdmin) {
+            // Si el usuario es administrador, obtener todas las reservas
+            reservas = reservaRepo.findAll(pageable);
+        } else {
+            // Obtener los detalles del usuario actual
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+            // Obtener el correo electrónico del usuario actual
+            String email = userDetails.getUsername();
+
+            // Realizar la consulta de reservas filtrando por el correo electrónico del usuario
+            reservas = reservaRepo.findByUsuarioEmail(email, pageable);
+        }
+
         return new ModelAndView("reservas")
                 .addObject("reservas", reservas);
     }
