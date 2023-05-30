@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.proyecto.eventos.modelo.Evento;
 import com.proyecto.eventos.modelo.Reserva;
 import com.proyecto.eventos.repositorios.ReservaRepositorio;
 import com.proyecto.eventos.servicio.ReservaDao;
@@ -68,4 +69,11 @@ public class ReservaControlador {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        }
 //    }
+    @PostMapping("/{id}/eliminar")
+	public String eliminarReserva(@PathVariable Integer id) {
+		Reserva reserva = reservaRepo.getOne(id);
+		reservaRepo.delete(reserva);
+		
+		return "redirect:/reservas";
+	}
 }

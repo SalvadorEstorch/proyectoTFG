@@ -14,7 +14,7 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-				    <th></th>
+					<th></th>
 					<th>Fecha de reserva</th>
 					<th>Evento</th>
 					<th>Usuario reserva</th>
@@ -24,20 +24,23 @@
 			</thead>
 			<tbody>
 				<tr th:each="reserva : ${reservas}" th:object="${reserva}">
-				<td style="width: 150px;"><a
+					<td style="width: 150px;"><a
 						th:href="@{/assets/{filename}(filename=*{evento.rutaPortada})}"
 						data-fancybox> <img
-							th:src="@{/assets/{filename}(filename=*{evento.rutaPortada})}" alt=""
-							class="img-thumbnail w-100">
+							th:src="@{/assets/{filename}(filename=*{evento.rutaPortada})}"
+							alt="" class="img-thumbnail w-100">
 					</a></td>
 					<td th:text="*{fechaReserva}"></td>
 					<td th:text="*{evento.nombreE}"></td>
 					<td th:text="*{usuario.nombre} + ' ' + *{usuario.apellido}"></td>
 					<td th:text="*{cantidadPersonas}"></td>
 					<td class="text-end">
-					<div class="btn">
+						<div class="btn">
 							<a href="javascript:void(0)" class="btn btn-danger"
-								th:onclick="'eliminarReserva(\'' + ${idReserva} + '\')'">Cancelar reserva</a>
+								th:onclick="'eliminarReserva(' + *{idReserva} +')'">Eliminar</a>
+							<form th:id="'eliminarReservaForm' + *{idReserva}"
+								th:action="@{/reservas/{id}/eliminar(id=*{idReserva})}" method="post"
+								class="d-none"></form>
 						</div>
 					</td>
 				</tr>
@@ -56,23 +59,12 @@
 	</div>
 	<div layout:fragment="scripts">
 		<script>
-			function eliminarReserva(id) {
-				if (!confirm('¿Estás seguro de eliminar esta reserva?')) {
-					// Construir la URL de redirección con el ID del usuario
-					var url = "/reservas/" + id + "/eliminar";
-
-					// Crear un formulario dinámicamente
-					var form = document.createElement("form");
-					form.method = "POST";
-					form.action = url;
-
-					// Agregar el formulario al cuerpo del documento
-					document.body.appendChild(form);
-
-					// Enviar el formulario
-					form.submit();
-				}
+		function eliminarReserva(id) {
+			if (!confirm('¿Estás seguro de eliminar esta reserva?')) {
+				return;
 			}
+			$('#eliminarReservaForm' + id).submit();
+		}
 		</script>
 	</div>
 
