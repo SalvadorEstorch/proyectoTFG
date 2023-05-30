@@ -6,6 +6,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,9 +43,20 @@ public class ReservaControlador {
     // Endpoint para obtener todas las reservas
     @GetMapping("")
     public ModelAndView listarReservas(@PageableDefault Pageable pageable) {
-    	Page<Reserva> reservas = reservaRepo.findAll(pageable);
-    	return new ModelAndView("reservas")
-		        .addObject("reservas",reservas);
+        // Obtener el objeto de autenticación actual
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+        // Obtener los detalles del usuario actual
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        
+        // Obtener el correo electrónico del usuario actual
+        String email = userDetails.getUsername();
+        
+        // Realizar la consulta de reservas filtrando por el correo electrónico del usuario
+        Page<Reserva> reservas = reservaRepo.findByUsuarioEmail(email, pageable);
+        
+        return new ModelAndView("reservas")
+                .addObject("reservas", reservas);
     }
 
 //    // Endpoint para crear una nueva reserva
