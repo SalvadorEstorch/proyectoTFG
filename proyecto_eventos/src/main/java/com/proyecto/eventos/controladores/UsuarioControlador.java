@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.eventos.dto.RegistroUsuarioDTO;
-import com.proyecto.eventos.modelo.Evento;
 import com.proyecto.eventos.modelo.Reserva;
 import com.proyecto.eventos.modelo.Usuario;
 import com.proyecto.eventos.repositorios.ReservaRepositorio;
@@ -76,13 +75,6 @@ public class UsuarioControlador {
 	    return "redirect:/login";
 	}
 	
-	
-	
-//	@GetMapping("/usuarios/{username}")
-//	public ModelAndView mostrarDetallesUsuario(@PathVariable Integer idEvento) {
-//		Evento evento = eRepo.getOne(idEvento);
-//		return new ModelAndView("evento").addObject("evento",evento);
-//	}
 	
 	@PostMapping("/usuarios/{id}/eliminar")
 	public String eliminarUsuario(@PathVariable Long id, RedirectAttributes redirectAttributes) {
