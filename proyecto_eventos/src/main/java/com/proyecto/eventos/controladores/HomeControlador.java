@@ -49,94 +49,49 @@ public class HomeControlador {
 	                  .addObject("eventos", eventosActivos);
 	}
 	
-	@GetMapping("/eventos")
-	public ModelAndView listarEventos(@PageableDefault(sort = "fechaInicio",direction = Sort.Direction.DESC) Pageable pageable) {
-		Page<Evento> eventos = (Page<Evento>) eRepo.findByActivo(1, null);
-		return new ModelAndView("eventos")
-				        .addObject("eventos",eventos);
-	}
+//	
+//	@GetMapping("/usuarios")
+//	public ModelAndView listarUsuarios(@PageableDefault(sort = "fechaRegistro",direction = Sort.Direction.DESC) Pageable pageable) {
+//		Page<Usuario> usuarios = uRepo.findAll(pageable);
+//		return new ModelAndView("usuarios")
+//				        .addObject("usuarios",usuarios);
+//	}
+//	
+//	
+//	@GetMapping("/usuarios/{username}")
+//	public ModelAndView mostrarDetallesUsuario(@PathVariable Integer idEvento) {
+//		Evento evento = eRepo.getOne(idEvento);
+//		return new ModelAndView("evento").addObject("evento",evento);
+//	}
 	
-	
-	@GetMapping("/eventos/{idEvento}")
-	public ModelAndView mostrarDetallesEvento(@PathVariable Integer idEvento) {
-		Evento evento = eRepo.getOne(idEvento);
-		return new ModelAndView("evento").addObject("evento",evento);
-	}
-	
-	@GetMapping("/eventos/{id}/reservarEvento")
-	public ModelAndView formReservaEvento(@PathVariable Integer id) {
-		ModelAndView modelAndView = new ModelAndView("altaReserva"); //formulario para reserva
-	    modelAndView.addObject("reserva", new Reserva());
-	    
-	    return modelAndView;
-	}
-	@PostMapping("/eventos/{id}/reservarEvento")
-    public String registrarReservaEvento(@PathVariable Integer id,@Validated Reserva reserva,BindingResult bindingResult, Model model) {
-		Evento evento = eRepo.getOne(id);
-
-	    // Obtener el usuario autenticado
-	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    String username = authentication.getName(); // Se obtiene el username del usuario logado
-	    Usuario usuario = uRepo.findByEmail(username);
-
-	    // Verificar si el usuario ya ha reservado este evento
-	    if (rRepo.existsByEventoAndUsuario(evento, usuario)) {
-	    	String mensajeError = "Ya has reservado este evento.";
-	        model.addAttribute("mensajeError", mensajeError);
-	        return "altaReserva";
-	    }
-
-	   
-
-	    reserva.setEvento(evento); // Asignar el evento a la reserva
-	    reserva.setUsuario(usuario); // Asignar el usuario a la reserva
-	    rRepo.save(reserva);
-
-	    return "redirect:/reservas";
-	}
-	
-	@GetMapping("/usuarios")
-	public ModelAndView listarUsuarios(@PageableDefault(sort = "fechaRegistro",direction = Sort.Direction.DESC) Pageable pageable) {
-		Page<Usuario> usuarios = uRepo.findAll(pageable);
-		return new ModelAndView("usuarios")
-				        .addObject("usuarios",usuarios);
-	}
-	
-	
-	@GetMapping("/usuarios/{username}")
-	public ModelAndView mostrarDetallesUsuario(@PathVariable Integer idEvento) {
-		Evento evento = eRepo.getOne(idEvento);
-		return new ModelAndView("evento").addObject("evento",evento);
-	}
-	
-	@PostMapping("/usuarios/{id}/eliminar")
-	public String eliminarUsuario(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-	    try {
-	        Usuario usuario = uRepo.getOne(id);
-
-	        // Obtener las reservas asociadas al usuario
-	        List<Reserva> reservas = rRepo.findByUsuario(usuario);
-
-	        // Verificar si hay reservas asociadas al usuario
-	        if (!reservas.isEmpty()) {
-	            throw new DataIntegrityViolationException("No se puede eliminar el usuario porque tiene reservas asociadas.");
-	        }
-
-	        // Eliminar todas las relaciones entre el usuario y los roles
-	        usuario.getRoles().clear();
-
-	        // Guardar los cambios en la base de datos
-	        uRepo.save(usuario);
-
-	        // Eliminar el usuario
-	        uRepo.delete(usuario);
-
-	        return "redirect:/usuarios";
-	    } catch (DataIntegrityViolationException e) {
-	        // Capturar la excepción y mostrar un mensaje adecuado en la página de usuarios
-	        redirectAttributes.addFlashAttribute("errorMessage", "No se puede eliminar el usuario porque tiene reservas asociadas.");
-	        return "redirect:/usuarios";
-	    }
-	}
-	
+//	@PostMapping("/usuarios/{id}/eliminar")
+//	public String eliminarUsuario(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+//	    try {
+//	        Usuario usuario = uRepo.getOne(id);
+//
+//	        // Obtener las reservas asociadas al usuario
+//	        List<Reserva> reservas = rRepo.findByUsuario(usuario);
+//
+//	        // Verificar si hay reservas asociadas al usuario
+//	        if (!reservas.isEmpty()) {
+//	            throw new DataIntegrityViolationException("No se puede eliminar el usuario porque tiene reservas asociadas.");
+//	        }
+//
+//	        // Eliminar todas las relaciones entre el usuario y los roles
+//	        usuario.getRoles().clear();
+//
+//	        // Guardar los cambios en la base de datos
+//	        uRepo.save(usuario);
+//
+//	        // Eliminar el usuario
+//	        uRepo.delete(usuario);
+//
+//	        return "redirect:/usuarios";
+//	    } catch (DataIntegrityViolationException e) {
+//	        // Capturar la excepción y mostrar un mensaje adecuado en la página de usuarios
+//	        redirectAttributes.addFlashAttribute("errorMessage", "No se puede eliminar el usuario porque tiene reservas asociadas.");
+//	        return "redirect:/usuarios";
+//	    }
+//	}
+//	
 }
