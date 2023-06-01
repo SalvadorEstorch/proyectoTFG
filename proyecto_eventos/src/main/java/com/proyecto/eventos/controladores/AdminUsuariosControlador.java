@@ -27,11 +27,11 @@ import com.proyecto.eventos.servicio.UsuarioDao;
 
 @Controller
 @RequestMapping("")
-public class UsuarioControlador {
+public class AdminUsuariosControlador {
 
 	private UsuarioDao usuarioDao;
 
-	public UsuarioControlador(UsuarioDao usuarioServicio) {
+	public AdminUsuariosControlador(UsuarioDao usuarioServicio) {
 		super();
 		this.usuarioDao = usuarioServicio;
 	}	

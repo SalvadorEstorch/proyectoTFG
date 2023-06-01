@@ -19,7 +19,7 @@ import com.proyecto.eventos.servicio.AlmacenServicioImpl;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminControlador {
+public class AdminEventosControlador {
 
 	@Autowired
 	private EventoRepositorio eRepo;
