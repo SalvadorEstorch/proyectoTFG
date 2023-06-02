@@ -102,7 +102,7 @@ public class AdminUsuariosControlador {
 	    } catch (DataIntegrityViolationException e) {
 	        // Capturar la excepción y mostrar un mensaje adecuado en la página de usuarios
 	        redirectAttributes.addFlashAttribute("errorMessage", "No se puede eliminar el usuario porque tiene reservas asociadas.");
-	        return "redirect:/usuarios";
+	        return "redirect:/admin";
 	    }
 	}
 }

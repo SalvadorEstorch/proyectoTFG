@@ -11,6 +11,7 @@
         .active-tab {
             display: block;
         }
+        
     </style>
 </head>
 <body sec:authorize="hasRole('ROLE_ADMIN')">
@@ -25,7 +26,7 @@
     </li>
 </ul>
 
-<div class="tab-content" id="eventos">
+<div class="tab-content" id="eventos" style="display: block;">
 
     <div class="text-end">
         <a href="/admin/eventos/nuevo" class="btn btn-primary mb-3">Agregar evento</a>
