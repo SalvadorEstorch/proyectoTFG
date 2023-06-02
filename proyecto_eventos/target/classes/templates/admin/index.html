@@ -33,6 +33,9 @@
 				<a href="/admin/eventos/nuevo" class="btn btn-primary mb-3">Agregar
 					evento</a>
 			</div>
+			<div th:if="${error}" class="alert alert-danger" role="alert">
+				<strong>Error:</strong> <span th:text="${error}"></span>
+			</div>
 			<table class="table table-hover">
 
 				<thead>
@@ -95,14 +98,11 @@
 		</div>
 
 		<div class="tab-content" id="usuarios"
-    th:classappend="${activeTab == 'usuarios'} ? 'active-tab' : ''"
-    style="display: none;">
-    <div th:if="${errorMessage}" class="error-message">
-        <p>
-            <span style="color: red; font-weight: bold;"
-                th:text="${errorMessage}"></span>
-        </p>
-    </div>
+			th:classappend="${activeTab == 'usuarios'} ? 'active-tab' : ''"
+			style="display: none;">
+			<div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+			<strong>Error:</strong> <span th:text="${errorMessage}"></span>
+			</div>
 
 			<table class="table table-hover">
 

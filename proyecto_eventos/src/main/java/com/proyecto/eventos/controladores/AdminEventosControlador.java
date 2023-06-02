@@ -1,6 +1,7 @@
 package com.proyecto.eventos.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -116,13 +117,18 @@ public class AdminEventosControlador {
 	}
 	
 	@PostMapping("/eventos/{id}/eliminar")
-	public String eliminarEvento(@PathVariable Integer id) {
-		Evento evento = eRepo.getOne(id);
-		eRepo.delete(evento);
-		servicio.eliminarArchivo(evento.getRutaPortada());
-		
-		return "redirect:/admin";
+	public String eliminarEvento(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+	    try {
+	        Evento evento = eRepo.getOne(id);
+	        eRepo.delete(evento);
+	        servicio.eliminarArchivo(evento.getRutaPortada());
+	        return "redirect:/admin";
+	    } catch (DataIntegrityViolationException e) {
+	        redirectAttributes.addFlashAttribute("error", "No se puede eliminar el evento porque está relacionado con una reserva.");
+	        return "redirect:/admin";
+	    }
 	}
+
 	
 	@GetMapping("/eventos/{id}/desactivar")
 	public String desactivarEvento(@PathVariable Integer id) {
