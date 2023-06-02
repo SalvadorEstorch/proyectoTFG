@@ -23,14 +23,18 @@
 					<div class="invalid-feedback"
 						th:if="${#fields.hasErrors('cantidadPersonas')}"
 						th:errors="*{cantidadPersonas}"></div>
+					<div th:if="${mensajeError}" class="text-danger">
+						<p th:text="${mensajeError}"></p>
+					</div>
 				</div>
 
 				<div class="text-end">
-					<button type="submit" class="btn btn-primary">Guardar</button>
+					<button type="submit" class="btn btn-primary" >Guardar</button>
 				</div>
 			</form>
 
 		</div>
 	</div>
+
 </body>
 </html>
