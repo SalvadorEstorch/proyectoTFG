@@ -29,7 +29,8 @@
 
 
 
-							<h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; font-family: 'Indie Flower', cursive;">Regístrate</h3>
+							<h3 class="fw-normal mb-3 pb-3"
+								style="letter-spacing: 1px; font-family: 'Indie Flower', cursive;">Regístrate</h3>
 
 
 							<div class="form-outline mb-4">
@@ -51,8 +52,8 @@
 							</div>
 
 							<!-- En caso de que el correo ya exista no deja crear el usuario y muestra este error -->
-							<div th:if="${error}" class="error-message">
-								<p th:text="${error}" style="color: red;"></p>
+							<div th:if="${error}" class="alert alert-danger" role="alert">
+								<strong>Error:</strong> <span th:text="${error}"></span>
 							</div>
 
 							<div class="form-outline mb-4">
