@@ -19,10 +19,11 @@
 	<div layout:fragment="content">
 
 		<ul class="nav nav-tabs">
-			<li class="nav-item"><a class="nav-link active"
-				onclick="changeTab('eventos')">Eventos</a></li>
-			<li class="nav-item"><a class="nav-link"
-				onclick="changeTab('usuarios')">Usuarios</a></li>
+			<li class="nav-item"><a id="eventos-link"
+				class="nav-link active"
+				onclick="changeTab('eventos'); setActiveLink('eventos-link')">Eventos</a></li>
+			<li class="nav-item"><a id="usuarios-link" class="nav-link"
+				onclick="changeTab('usuarios'); setActiveLink('usuarios-link')">Usuarios</a></li>
 		</ul>
 
 		<div class="tab-content" id="eventos"
@@ -101,7 +102,7 @@
 			th:classappend="${activeTab == 'usuarios'} ? 'active-tab' : ''"
 			style="display: none;">
 			<div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-			<strong>Error:</strong> <span th:text="${errorMessage}"></span>
+				<strong>Error:</strong> <span th:text="${errorMessage}"></span>
 			</div>
 
 			<table class="table table-hover">
@@ -172,6 +173,37 @@
 				}
 				$('#eliminarUsuarioForm' + id).submit();
 				changeTab('usuarios');
+			}
+
+			// Variable para almacenar el enlace activo
+			var activeLink = '';
+
+			// Función para establecer el enlace activo
+			function setActiveLink(linkId) {
+				activeLink = linkId;
+			}
+
+			// Ejemplo de uso para verificar el enlace activo
+			function checkActiveLink() {
+				console.log('Enlace activo:', activeLink);
+			}
+
+			function changeTab(tabId) {
+				var tabContent = document.getElementsByClassName("tab-content");
+				for (var i = 0; i < tabContent.length; i++) {
+					tabContent[i].style.display = "none";
+				}
+
+				document.getElementById(tabId).style.display = "block";
+
+				// Actualizar clase 'active' del enlace activo
+				var activeNavLinks = document
+						.getElementsByClassName("nav-link");
+				for (var i = 0; i < activeNavLinks.length; i++) {
+					activeNavLinks[i].classList.remove("active");
+				}
+
+				document.getElementById(activeLink).classList.add("active");
 			}
 		</script>
 	</div>
