@@ -1,20 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{master.html}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{master.html}">
 <head>
-<meta charset="utf-8">
-<title>Administrar Eventos</title>
+    <meta charset="utf-8">
+    <title>Administrar Eventos</title>
+    <style>
+        .tab-content {
+            display: none;
+        }
+
+        .active-tab {
+            display: block;
+        }
+    </style>
 </head>
 <body sec:authorize="hasRole('ROLE_ADMIN')">
+<div layout:fragment="content">
 
-	<div layout:fragment="content">
-		<h2>Eventos</h2>
-		<div class="text-end">
-			<a href="/admin/eventos/nuevo" class="btn btn-primary mb-3">
-				Agregar evento </a>
-		</div>
-		<table class="table table-hover">
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" onclick="changeTab('eventos')">Eventos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" onclick="changeTab('usuarios')">Usuarios</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="eventos">
+
+    <div class="text-end">
+        <a href="/admin/eventos/nuevo" class="btn btn-primary mb-3">Agregar evento</a>
+    </div>
+    <table class="table table-hover">
+        
 			<thead>
 				<tr>
 					<th></th>
@@ -69,9 +86,76 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	
+    </table>
+</div>
 
-	<div layout:fragment="scripts">
+<div class="tab-content" id="usuarios" style="display: none;">
+    
+    <div th:if="${errorMessage}" class="error-message">
+        <p><span style="color: red; font-weight: bold;" th:text="${errorMessage}"></span></p>
+    </div>
+    <div th:if="${errorMessage}" class="error-message"></div>
+    <p>
+				<span style="color: red; font-weight: bold;"
+					th:text="${errorMessage}"></span>
+			</p>
+    <table class="table table-hover">
+		
+		
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Correo</th>
+					<th>Fecha</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="usuario : ${usuarios}" th:object="${usuario}">
+					<td th:text="*{nombre}" class="fs-5 fw-bold"></td>
+					<td th:text="*{apellido}"></td>
+					<td th:text="*{email}"></td>
+					<td th:text="*{fechaRegistro}"></td>
+					<td class="text-end">
+<!-- 						<div class="btn"> -->
+<!-- 							<a th:href="@{/admin/eventos/{id}/desactivar(id=*{idEvento})}" -->
+<!-- 								th:if="${evento.activo == 1}" class="btn btn-outline-danger">Desactivar</a> -->
+
+<!-- 							<a th:href="@{/admin/eventos/{id}/activar(id=*{idEvento})}" -->
+<!-- 								th:if="${evento.activo == 0}" class="btn btn-success">Activar</a> -->
+<!-- 						</div> -->
+<!-- 						<div class="btn"> -->
+<!-- 							<a th:href="@{/admin/eventos/{id}/editar(id=*{idEvento})}" -->
+<!-- 								class="btn btn-primary">Editar</a> -->
+<!-- 						</div> -->
+						<div class="btn">
+							<a href="javascript:void(0)" class="btn btn-danger"
+								th:onclick="'eliminarUsuario(' + *{id} +')'">Eliminar</a>
+							<form th:id="'eliminarUsuarioForm' + *{id}"
+								th:action="@{/usuarios/{id}/eliminar(id=*{id})}" method="post"
+								class="d-none"></form>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+   
+</div>
+</div>
+<div layout:fragment="scripts">
+    <script>
+        function changeTab(tabId) {
+            var tabContent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+
+            document.getElementById(tabId).style.display = "block";
+        }
+    </script>
+
 		<script>
 			function eliminarEvento(id) {
 				if (!confirm('¿Estás seguro de eliminar este evento?')) {
@@ -80,7 +164,16 @@
 				$('#eliminarEventoForm' + id).submit();
 			}
 		</script>
-	</div>
+		
+		<script>
+			function eliminarUsuario(id) {
+				if (!confirm('¿Estás seguro de eliminar este usuario?')) {
+					return;
+				}
+				$('#eliminarUsuarioForm' + id).submit();
+			}
+		</script>
+</div>
 
 </body>
 </html>

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proyecto.eventos.modelo.Evento;
+import com.proyecto.eventos.modelo.Usuario;
 import com.proyecto.eventos.repositorios.EventoRepositorio;
+import com.proyecto.eventos.repositorios.UsuarioRepositorio;
 import com.proyecto.eventos.servicio.AlmacenServicioImpl;
 
 @Controller
@@ -26,13 +28,18 @@ public class AdminEventosControlador {
 
 	@Autowired
 	private AlmacenServicioImpl servicio;
+	
+	@Autowired
+	private UsuarioRepositorio uRepo;
 
 	
 	@GetMapping("")
-	public ModelAndView verPaginaDeInicio(@PageableDefault(sort = "nombreE", size = 5) Pageable pageable) {
+	public ModelAndView verPaginaDeInicio(@PageableDefault Pageable pageable) {
 		Page<Evento> eventos = eRepo.findAll(pageable);
+		Page<Usuario> usuarios = uRepo.findAll(pageable);
 		return new ModelAndView("admin/index")
-				.addObject("eventos", eventos);
+				.addObject("eventos", eventos)
+		        .addObject("usuarios", usuarios);
 	}
 
 	@GetMapping("/eventos/nuevo")
