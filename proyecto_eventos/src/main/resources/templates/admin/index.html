@@ -146,16 +146,6 @@
 		</div>
 	</div>
 	<div layout:fragment="scripts">
-		<script>
-			function changeTab(tabId) {
-				var tabContent = document.getElementsByClassName("tab-content");
-				for (var i = 0; i < tabContent.length; i++) {
-					tabContent[i].style.display = "none";
-				}
-
-				document.getElementById(tabId).style.display = "block";
-			}
-		</script>
 
 		<script>
 			function eliminarEvento(id) {
@@ -175,18 +165,18 @@
 				changeTab('usuarios');
 			}
 
-			// Variable para almacenar el enlace activo
-			var activeLink = '';
+			// 			// Variable para almacenar el enlace activo
+			// 			var activeLink = '';
 
-			// Función para establecer el enlace activo
-			function setActiveLink(linkId) {
-				activeLink = linkId;
-			}
+			// 			// Función para establecer el enlace activo
+			// 			function setActiveLink(linkId) {
+			// 				activeLink = linkId;
+			// 			}
 
-			// Ejemplo de uso para verificar el enlace activo
-			function checkActiveLink() {
-				console.log('Enlace activo:', activeLink);
-			}
+			// 			// Ejemplo de uso para verificar el enlace activo
+			// 			function checkActiveLink() {
+			// 				console.log('Enlace activo:', activeLink);
+			// 			}
 
 			function changeTab(tabId) {
 				var tabContent = document.getElementsByClassName("tab-content");
@@ -203,7 +193,19 @@
 					activeNavLinks[i].classList.remove("active");
 				}
 
-				document.getElementById(activeLink).classList.add("active");
+				var activeLink = document.getElementById(tabId + "-link");
+				activeLink.classList.add("active");
+			}
+
+			function setActiveLink(linkId) {
+				var activeNavLinks = document
+						.getElementsByClassName("nav-link");
+				for (var i = 0; i < activeNavLinks.length; i++) {
+					activeNavLinks[i].classList.remove("active");
+				}
+
+				var link = document.getElementById(linkId);
+				link.classList.add("active");
 			}
 		</script>
 	</div>
