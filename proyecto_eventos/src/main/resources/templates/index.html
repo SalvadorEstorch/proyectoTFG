@@ -4,34 +4,37 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 	layout:decorate="~{master.html}">
 <head>
-<meta charset="utf-8">
-<title>Inicio</title>
+	<meta charset="utf-8">
+	<title>Inicio</title>
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	
 </head>
 <body>
-
 	<div layout:fragment="content">
 		<div class="bg-light p-5 rounded">
-			<img src="/assets/banner.png" alt="Mi imagen"
-				class="img-fluid rounded w-100">
+			<img src="/assets/banner.png" alt="Mi imagen" class="img-fluid rounded w-100"/>
 		</div>
-		<h4 sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
-			Bienvenido <span sec:authentication="principal.username"></span>
-		</h4>
-		<h4 class="text-danger mt-5">Últimos eventos</h4>
+		<h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; font-family: 'Indie Flower', cursive; color: #8534DB;" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
+    Bienvenido <span sec:authentication="principal.username"></span>
+</h3>
+		<h4 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; font-family: 'Cinzel', serif; color: #8534DB;">Últimos eventos</h4>
 
 		<div class="row">
-			<div class="col-md-3 my-5" th:each="evento : ${eventos}"
-				th:object="${evento}">
-				<a th:href="@{/eventos/{id}(id=*{idEvento})}" class="card shadow-lg"
-					style="text-decoration: none;"> <img
-					th:src="@{/assets/{filename}(filename=*{rutaPortada})}"
-					th:alt="*{nombreE}" class="card-img-top">
+			<div class="col-md-3 my-5" th:each="evento : ${eventos}" th:object="${evento}">
+				<a th:href="@{/eventos/{id}(id=*{idEvento})}" class="card shadow-lg" style="text-decoration: none;">
+					<img th:src="@{/assets/{filename}(filename=*{rutaPortada})}" th:alt="*{nombreE}" class="card-img-top">
 					<div class="card-body">
 						<h2 class="card-title fs-6" th:text="*{nombreE}"></h2>
 					</div>
 				</a>
 			</div>
 		</div>
+       <div th:include="footer :: footer"></div>
 	</div>
+
+	
 </body>
 </html>
+

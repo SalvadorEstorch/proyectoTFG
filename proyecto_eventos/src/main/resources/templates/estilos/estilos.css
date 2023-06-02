@@ -1,0 +1,28 @@
+.custom-footer {
+  background-color: #487CFF;
+  color: #E5B43A;
+}
+
+.custom-top {
+  background-color: #C27584;
+  /* Otros estilos específicos */
+}
+
+.navbar {
+  background-color: #487CFF !important;
+  color: #000000 !important;
+}
+
+.bg-red {
+    background-color:  #C27584;
+}
+
+@font-face {
+    font-family: "Indie Flower";
+    src: url("../fonts/indieflower.ttf") format("truetype");
+}
+
+.custom-div {
+  font-family: 'Overpass Bold', sans-serif;
+}
+
