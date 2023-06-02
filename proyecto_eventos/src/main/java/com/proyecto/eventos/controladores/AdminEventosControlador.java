@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.eventos.modelo.Evento;
 import com.proyecto.eventos.modelo.Usuario;
@@ -34,12 +35,20 @@ public class AdminEventosControlador {
 
 	
 	@GetMapping("")
-	public ModelAndView verPaginaDeInicio(@PageableDefault Pageable pageable) {
-		Page<Evento> eventos = eRepo.findAll(pageable);
-		Page<Usuario> usuarios = uRepo.findAll(pageable);
-		return new ModelAndView("admin/index")
-				.addObject("eventos", eventos)
-		        .addObject("usuarios", usuarios);
+	public ModelAndView verPaginaDeInicio(@PageableDefault Pageable pageable, RedirectAttributes redirectAttributes) {
+	    Page<Evento> eventos = eRepo.findAll(pageable);
+	    Page<Usuario> usuarios = uRepo.findAll(pageable);
+
+	    String activeTab = "eventos"; // Pestaña de eventos como predeterminada
+
+	    if (redirectAttributes.containsAttribute("activeTab")) {
+	        activeTab = (String) redirectAttributes.getFlashAttributes().get("activeTab");
+	    }
+
+	    return new ModelAndView("admin/index")
+	            .addObject("eventos", eventos)
+	            .addObject("usuarios", usuarios)
+	            .addObject("activeTab", activeTab);
 	}
 
 	@GetMapping("/eventos/nuevo")
