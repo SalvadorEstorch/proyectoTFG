@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.eventos.modelo.Evento;
+import com.proyecto.eventos.modelo.Usuario;
 import com.proyecto.eventos.repositorios.EventoRepositorio;
+import com.proyecto.eventos.repositorios.UsuarioRepositorio;
 import com.proyecto.eventos.servicio.AlmacenServicioImpl;
 
 @Controller
@@ -26,13 +29,26 @@ public class AdminEventosControlador {
 
 	@Autowired
 	private AlmacenServicioImpl servicio;
+	
+	@Autowired
+	private UsuarioRepositorio uRepo;
 
 	
 	@GetMapping("")
-	public ModelAndView verPaginaDeInicio(@PageableDefault(sort = "nombreE", size = 5) Pageable pageable) {
-		Page<Evento> eventos = eRepo.findAll(pageable);
-		return new ModelAndView("admin/index")
-				.addObject("eventos", eventos);
+	public ModelAndView verPaginaDeInicio(@PageableDefault Pageable pageable, RedirectAttributes redirectAttributes) {
+	    Page<Evento> eventos = eRepo.findAll(pageable);
+	    Page<Usuario> usuarios = uRepo.findAll(pageable);
+
+	    String activeTab = "eventos"; // Pestaña de eventos como predeterminada
+
+	    if (redirectAttributes.containsAttribute("activeTab")) {
+	        activeTab = (String) redirectAttributes.getFlashAttributes().get("activeTab");
+	    }
+
+	    return new ModelAndView("admin/index")
+	            .addObject("eventos", eventos)
+	            .addObject("usuarios", usuarios)
+	            .addObject("activeTab", activeTab);
 	}
 
 	@GetMapping("/eventos/nuevo")
