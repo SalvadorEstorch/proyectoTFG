@@ -33,8 +33,6 @@ Ahora debemos abrir **MySQL** y hacer lo siguiente:
 
 A continuación debemos importarlo en eclipse.
 
-![Untitled](README%2015540e152b324410b855956b2bf29a21/Untitled.png)
-
 Una vez importado debemos revisar el archivo de **application.properties** ya que es probable que se tengamos que modificar alguna de ellas.
 
 ```html
