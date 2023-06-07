@@ -1,8 +1,13 @@
 package com.proyecto.eventos.controladores;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -20,6 +25,7 @@ import com.proyecto.eventos.modelo.Usuario;
 import com.proyecto.eventos.repositorios.EventoRepositorio;
 import com.proyecto.eventos.repositorios.UsuarioRepositorio;
 import com.proyecto.eventos.servicio.AlmacenServicioImpl;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -46,8 +52,11 @@ public class AdminEventosControlador {
 	        activeTab = (String) redirectAttributes.getFlashAttributes().get("activeTab");
 	    }
 
+	    List<Evento> eventosList = new ArrayList<>(eventos.getContent());
+	    eventosList.sort(Comparator.comparing(Evento::getActivo));
+
 	    return new ModelAndView("admin/index")
-	            .addObject("eventos", eventos)
+	            .addObject("eventos", new PageImpl<>(eventosList, pageable, eventos.getTotalElements()))
 	            .addObject("usuarios", usuarios)
 	            .addObject("activeTab", activeTab);
 	}
