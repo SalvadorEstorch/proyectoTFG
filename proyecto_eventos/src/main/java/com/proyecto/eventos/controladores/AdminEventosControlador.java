@@ -157,5 +157,4 @@ public class AdminEventosControlador {
 		return "redirect:/admin";
 	}
 	
- 
 }
