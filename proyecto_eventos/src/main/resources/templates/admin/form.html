@@ -13,59 +13,19 @@
 			enctype="multipart/form-data">
 			
 			<div class="mb-3">
-				<label for="activo" class="form-label">Activo : </label> <input
-					type="text" id="activo" placeholder="¿Está activo?"
-					class="form-control" th:field="*{activo}">
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('activo')}"
-					th:errors="*{activo}"></div>
+				<label for="nombreE" class="form-label">Nombre del Evento : </label> <input
+					type="text" id="nombreE" placeholder="Introduzca el nombre del evento"
+					class="form-control" th:field="*{nombreE}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('nombreE')}"
+					th:errors="*{nombreE}"></div>
 			</div>
 			
-			<div class="mb-3">
-				<label for="aforoMax" class="form-label">Aforo Máximo : </label> <input
-					type="number" id="aforoMax" placeholder="Introduzca el aforo máximo"
-					class="form-control" th:field="*{aforoMax}">
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('aforoMax')}"
-					th:errors="*{aforoMax}"></div>
-			</div>
-			
-			<div class="mb-3">
-				<label for="ciudad" class="form-label">Ciudad : </label> <input
-					type="text" id="ciudad" placeholder="Introduzca la ciudad"
-					class="form-control" th:field="*{ciudad}">
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('ciudad')}"
-					th:errors="*{ciudad}"></div>
-			</div>
-
 			<div class="mb-3">
 				<label for="descripcionE" class="form-label">Descripción : </label>
 				<textarea id="sinopsis" placeholder="Introduzca la descripción"
 					class="form-control" th:field="*{descripcionE}"></textarea>
 				<div class="invalid-feedback"
 					th:if="${#fields.hasErrors('descripcionE')}" th:errors="*{descripcionE}"></div>
-			</div>
-			
-			<div class="mb-3">
-				<label for="destacado" class="form-label">Destacado : </label> <input
-					type="text" id="destacado" placeholder="¿Es un evento destacado?"
-					class="form-control" th:field="*{destacado}">
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('destacado')}"
-					th:errors="*{destacado}"></div>
-			</div>
-			
-			<div class="mb-3">
-				<label for="direccion" class="form-label">Dirección : </label> <input
-					type="text" id="direccion" placeholder="Introduzca la dirección"
-					class="form-control" th:field="*{direccion}">
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('direccion')}"
-					th:errors="*{direccion}"></div>
-			</div>
-			
-			<div class="mb-3">
-				<label for="duracion" class="form-label">Duración : </label> <input
-					type="number" id="duracion" placeholder="Introduzca la duración"
-					class="form-control" th:field="*{duracion}">
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('duracion')}"
-					th:errors="*{duracion}"></div>
 			</div>
 			
 			<div class="mb-3">
@@ -79,19 +39,11 @@
 			</div>
 			
 			<div class="mb-3">
-				<label for="minimoAsistencia" class="form-label">Asistencia mínima : </label> <input
-					type="number" id="minimoAsistencia" placeholder="Introduzca la asistencia mínima"
-					class="form-control" th:field="*{minimoAsistencia}">
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('minimoAsistencia')}"
-					th:errors="*{minimoAsistencia}"></div>
-			</div>
-			
-			<div class="mb-3">
-				<label for="nombreE" class="form-label">Nombre del Evento : </label> <input
-					type="text" id="nombreE" placeholder="Introduzca el nombre del evento"
-					class="form-control" th:field="*{nombreE}">
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('nombreE')}"
-					th:errors="*{nombreE}"></div>
+				<label for="duracion" class="form-label">Duración : </label> <input
+					type="number" id="duracion" placeholder="Introduzca la duración"
+					class="form-control" th:field="*{duracion}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('duracion')}"
+					th:errors="*{duracion}"></div>
 			</div>
 			
 			<div class="mb-3">
@@ -103,11 +55,51 @@
 			</div>
 			
 			<div class="mb-3">
+				<label for="aforoMax" class="form-label">Aforo Máximo : </label> <input
+					type="number" id="aforoMax" placeholder="Introduzca el aforo máximo"
+					class="form-control" th:field="*{aforoMax}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('aforoMax')}"
+					th:errors="*{aforoMax}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="minimoAsistencia" class="form-label">Asistencia mínima : </label> <input
+					type="number" id="minimoAsistencia" placeholder="Introduzca la asistencia mínima"
+					class="form-control" th:field="*{minimoAsistencia}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('minimoAsistencia')}"
+					th:errors="*{minimoAsistencia}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="direccion" class="form-label">Dirección : </label> <input
+					type="text" id="direccion" placeholder="Introduzca la dirección"
+					class="form-control" th:field="*{direccion}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('direccion')}"
+					th:errors="*{direccion}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="ciudad" class="form-label">Ciudad : </label> <input
+					type="text" id="ciudad" placeholder="Introduzca la ciudad"
+					class="form-control" th:field="*{ciudad}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('ciudad')}"
+					th:errors="*{ciudad}"></div>
+			</div>
+			
+			<div class="mb-3">
 				<label for="tipo" class="form-label">Tipo : </label> <input
 					type="text" id="tipo" placeholder="Introduzca el tipo"
 					class="form-control" th:field="*{tipo}">
 				<div class="invalid-feedback" th:if="${#fields.hasErrors('tipo')}"
 					th:errors="*{tipo}"></div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="destacado" class="form-label">Destacado : </label> <input
+					type="text" id="destacado" placeholder="¿Es un evento destacado?"
+					class="form-control" th:field="*{destacado}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('destacado')}"
+					th:errors="*{destacado}"></div>
 			</div>
 			
 			<div class="mb-3">
